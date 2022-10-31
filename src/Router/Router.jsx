@@ -6,6 +6,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <ManageProducts />,
+    loader: () => fetch(`http://localhost:15000/add`),
   },
   {
     path: "/add",

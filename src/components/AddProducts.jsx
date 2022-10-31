@@ -4,8 +4,28 @@ import { useForm } from "react-hook-form";
 const AddProducts = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (productinfo) => {
+    console.log(productinfo);
+
+    // ** sending the data to the server using the post method
+
+    const sendData = async () => {
+      try {
+        const response = await fetch(`http://localhost:15000/add`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(productinfo),
+        });
+        console.log("data has been sent");
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    sendData();
   };
 
   return (
