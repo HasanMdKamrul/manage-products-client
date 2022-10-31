@@ -18,9 +18,14 @@ const AddProducts = () => {
           },
           body: JSON.stringify(productinfo),
         });
-        console.log("data has been sent");
+
         const data = await response.json();
-        console.log(data);
+
+        if (data.acknowledged) {
+          console.log("data has been sent");
+          console.log(data);
+          alert("data has been uploaded to DB");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -40,13 +45,13 @@ const AddProducts = () => {
     >
       <h1>Add Products</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("Product Name")} placeholder="Products Name" />
+        <input {...register("productName")} placeholder="Products Name" />
         <br />
-        <input {...register("Quantity")} placeholder="Quantity" />
+        <input {...register("quantity")} placeholder="Quantity" />
         <br />
-        <input {...register("Price")} placeholder="Price" />
+        <input {...register("price")} placeholder="Price" />
         <br />
-        <input {...register("Picture")} placeholder="Picture" />
+        <input {...register("picture")} placeholder="Picture" />
         <br />
         <input type="Submit" />
       </form>
