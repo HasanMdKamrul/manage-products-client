@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 const ManageProducts = () => {
   const products = useLoaderData();
   console.log(products);
@@ -51,7 +51,10 @@ const ManageProducts = () => {
             <br />
             <button onClick={() => handleDelete(product)}>X</button>
             <br />
-            <button>Update</button>
+            <Link to={`/update/${product._id}`}>
+              {" "}
+              <button>Update</button>
+            </Link>
           </div>
         ))}
       </div>
