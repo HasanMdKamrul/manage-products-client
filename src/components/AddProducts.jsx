@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -9,29 +10,41 @@ const AddProducts = () => {
 
     // ** sending the data to the server using the post method
 
-    const sendData = async () => {
-      try {
-        const response = await fetch(`http://localhost:15000/add`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(productinfo),
-        });
-
-        const data = await response.json();
-
-        if (data.acknowledged) {
+    axios
+      .post("http://localhost:15000/add", productinfo)
+      .then((response) => {
+        if (response.acknowledged) {
           console.log("data has been sent");
-          console.log(data);
+          console.log(response);
           alert("data has been uploaded to DB");
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    sendData();
+      })
+      .catch((e) => console.log(e));
   };
+
+  //   const sendData = async () => {
+  //     try {
+  //       const response = await fetch(`http://localhost:15000/add`, {
+  //         method: "POST",
+  //         headers: {
+  //           "content-type": "application/json",
+  //         },
+  //         body: JSON.stringify(productinfo),
+  //       });
+
+  //       const data = await response.json();
+
+  // if (data.acknowledged) {
+  //   console.log("data has been sent");
+  //   console.log(data);
+  //   alert("data has been uploaded to DB");
+  // }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   sendData();
+  // };
 
   return (
     <div
